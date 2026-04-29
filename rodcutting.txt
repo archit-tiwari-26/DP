@@ -1,0 +1,24 @@
+// User function Template for C++
+
+class Solution {
+    
+  public:
+  int solve(vector<int>&price, int length, int i,vector<vector<int>>&dp){
+      if(length==0)return 0;
+      if(i==0)return 0;
+      if(dp[i][length]!=-1)return dp[i][length];
+      if(length>=i){
+        return   dp[i][length]= max(price[i-1]+solve(price, length-i,i,dp), solve(price, length,i-1,dp));
+      }
+      else return dp[i][length]=solve(price, length,i-1,dp);
+      
+  }
+    int cutRod(vector<int> &price) {
+    
+      int n= price.size();
+      vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+      
+      return solve(price, n, n,dp);
+        
+    }
+};
